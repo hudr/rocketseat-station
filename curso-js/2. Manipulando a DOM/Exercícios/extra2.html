@@ -1,0 +1,48 @@
+<!-- Desafio de montar lista com cálculos a partir de um input -->
+<html>
+
+<head>
+    <title>Curso JavaScript</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="number" value="0" id="x"> + <input type="number" value="0" id="y">
+        <button id="resultado">CALCULAR RESULTADO</button>
+
+        <ul></ul>
+    </div>
+
+    <script>
+        //Mapeando elementos com querySelector
+        var btnElement = document.querySelector('#resultado');
+
+        var xElement = document.querySelector('#x');
+        var yElement = document.querySelector('#y');
+
+        //Colocando resultados na <ul>
+        var listElement = document.querySelector('ul');
+
+        btnElement.onclick = function () {
+
+            var xValue = xElement.value;
+            var yValue = yElement.value;
+
+            //Perrengue do caralho!
+            var resultado = Number(xValue) + Number(yValue);
+
+            var liElement = document.createElement('li');
+
+            liElement.style.fontSize = '30px';
+
+            var resultLista = document.createTextNode('O resultado de: ' + xValue + "+" + yValue + " é igual a " + resultado + ".");
+
+            liElement.appendChild(resultLista);
+
+            listElement.appendChild(liElement);
+
+        };
+    </script>
+</body>
+
+</html>

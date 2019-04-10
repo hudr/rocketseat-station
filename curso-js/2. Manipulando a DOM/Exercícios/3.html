@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Exercício 03</title>
+</head>
+
+<body>
+    <ul></ul>
+
+    <script>
+        //Array com nomes
+        var nomes = ['Diego', 'Gabriel', 'Lucas', 'Hudson'];
+
+        //Encontra a UL dentro de body.
+        var listElement = document.querySelector('ul');
+
+        //Percorre o array e joga cada elemento dentro de 'nome'
+        for (nome of nomes) {
+
+            //Cria o elemento lista
+            var liElement = document.createElement('li');
+
+            //Cria um texto com os nomes do array
+            var textElement = document.createTextNode(nome);
+
+            //Insere dentro do elemento criado 'li' os textos/nomes.
+            liElement.appendChild(textElement);
+
+            //Insere uma nova 'li' no HTML.
+            listElement.appendChild(liElement);
+        };
+    </script>
+</body>
+
+</html>

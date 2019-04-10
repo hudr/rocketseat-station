@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Exercício 02</title>
+</head>
+
+<body>
+    <input type="text" name="user">
+    <button onclick="listRepositories()">Adicionar</button>
+
+    <ul></ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        //Mapeando campo <ul> e <input:
+        var listElement = document.querySelector('ul');
+        var inputElement = document.querySelector('input');
+
+        //Função que renderiza os repositórios recebendo repositories dentro do HTML
+        function renderRepositories(repositories) {
+
+            //Adiciona dentro da <ul> uma string vazia.
+            listElement.innerHTML = "";
+
+            //Loop em repositorios para buscar cada repositório
+            for (repo of repositories) {
+
+                //pega o name do repositório (tipo um parse) e cria um texto node.
+                const textElement = document.createTextNode(repo.name);
+
+                //Cria o elemento <li> (lista) já que criou o texto acima :)
+                const liElement = document.createElement('li');
+
+                //Insere o texto dentro da <li> criada acima.
+                liElement.appendChild(textElement);
+
+                //Insere o texto dentro da <li> na <ul> do HTML.
+                listElement.appendChild(liElement);
+            }
+        }
+
+        //Criando renderLoading para carregar enquanto o axios não processa
+        //toda a sua chamada, dependendo do peso de informações.
+        function renderLoading(loading) {
+
+            //Insere string vazia dentro da <ul> do HTML.
+            listElement.innerHTML = "";
+
+            //Cria um texto.
+            var textElement = document.createTextNode('Carregando...');
+
+            //Cria um elemento de <li>
+            var loadingElement = document.createElement('li');
+
+            //Insere o texto dentro da lista criada acima.
+            loadingElement.appendChild(textElement);
+
+            //Joga a lista acima já com texto dentro da UL.
+            listElement.appendChild(loadingElement);
+        }
+
+        //Mesma função que a de cima, só que aqui ele trabalha um erro fora do console
+        //e atribui esse erro a um <li> dentro de <ul>.
+        function renderError(loading) {
+            listElement.innerHTML = "";
+            var textElement = document.createTextNode('Erro!');
+            var errorElement = document.createElement('li');
+            errorElement.style.color = "#F00";
+            errorElement.appendChild(textElement);
+            listElement.appendChild(errorElement);
+        }
+
+        //Função para listar repositórios com axios.
+        function listRepositories() {
+
+            //Pega o valor do input e checa se está vazio ou não.
+            var user = inputElement.value;
+            if (!user) return;
+
+            //Chama a função de loading enquanto o axios faz o trabalho duro.
+            renderLoading();
+
+            //Chamada axios.
+            axios.get('https://api.github.com/users/' + user + '/repos')
+                .then(function (response) {
+
+                    //Chama o método que renderiza os repositórios entregando a resposta do json.
+                    renderRepositories(response.data);
+                })
+                .catch(function () {
+
+                    //Deu erro? Fique tranquilo! Eu te jogo no método de renredizar erro.
+                    renderError();
+                });
+        }
+    </script>
+</body>
+
+</html>

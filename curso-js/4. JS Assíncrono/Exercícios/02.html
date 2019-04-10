@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Exercício 02</title>
+</head>
+
+<body>
+    <input type="text" name="user">
+    <button onclick="listRepositories()">Adicionar</button>
+
+    <ul></ul>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        //Mapeando elementos
+        var listElement = document.querySelector('ul');
+        var inputElement = document.querySelector('input');
+
+        //Pegando e varrendo todos os repositórios
+        //chamando renderRepo e passando 'response.data' como parâmetro
+        function renderRepositories(repositories) {
+            //Cria um for para fazer um array de cada item puxado.
+            for (repo of repositories) {
+
+                //Criando texto com o nome de cada repositório no for.
+                const textElement = document.createTextNode(repo.name);
+
+                //Cria um elemento <li>(Lista)
+                const liElement = document.createElement('li');
+
+                //Coloca o nome de cada repositório dentro da lista criada acima.
+                liElement.appendChild(textElement);
+
+                //Insere esse elemento <li> já com nome do repo dentro de <ul> "listElement" lá em cima.
+                listElement.appendChild(liElement);
+            }
+        }
+
+        //Chamada axios para puxar repositórios
+        //e passar retorno para outro método
+        function listRepositories() {
+
+            //Pega o nome do campo mapeado lá em cima
+            var user = inputElement.value;
+
+            //[IMPORTANTE] Nessa linha ele verifica se o campo user (input) está vazio.
+            //Se estiver, ele retorna falso e não segue para a chamada axios.
+            //Poupando esforço.
+            if (!user) return;
+
+            //chamada axios para API do GitHub passando o elemento user
+            axios.get('https://api.github.com/users/' + user + '/repos')
+                .then(function (response) {
+
+                    //Jogando resposta para função de cima.
+                    renderRepositories(response.data);
+                })
+                .catch(function (error) {
+
+                    //Necessário pra quando dá merda. Um handle disso pode ser legal.
+                    //Imagine só o usuário tendo que ler 404 NOT FOUND.
+                    console.warn('Algo deu errado!');
+                });
+        }
+    </script>
+</body>
+
+</html>

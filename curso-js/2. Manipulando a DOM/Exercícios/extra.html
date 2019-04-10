@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Curso JavaScript</title>
+</head>
+
+<body>
+    <div id="app">
+        <input id="names" />
+        <button id="new">Inserir nome na lista</button>
+        <ul></ul>
+
+    </div>
+
+    <script>
+        //Pegando botão.
+        var btnElement = document.getElementById('new');
+
+        //Pegando input
+        var namesElement = document.getElementById('names');
+
+        //Pegando o elemento Lista '<ul></ul>'
+        var listElement = document.querySelector('ul');
+
+        //Chamando função no clique do botão.
+        btnElement.onclick = function () {
+
+            //Criando elemento '<li></li>' que ficará dentro de '<ul></ul>'
+            var liElement = document.createElement('li');
+
+            //Pegando valor do campo 'input' e passando para 'name'.
+            var name = document.createTextNode(namesElement.value);
+
+            //Mudando as propriedades do pai e não individual, no caso '<ul></ul>'
+            //pois tudo que entrar lá vai conter essas características.
+            listElement.style.fontSize = '30px';
+            listElement.style.color = 'red';
+            listElement.style.opacity = 0.5;
+
+            //Pegando o elemento <li> e passando 'nome' para ele.
+            liElement.appendChild(name);
+
+            //Jogando elemento <li> dentro da <ul>
+            listElement.appendChild(liElement);
+        };
+    </script>
+</body>
+
+</html>

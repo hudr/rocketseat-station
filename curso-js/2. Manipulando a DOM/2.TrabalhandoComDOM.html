@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Curso JavaScript</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <input type="text" name="nome" />
+            <button class="botao">Adicionar</button>
+        </div>
+        <script>
+
+            //Posso passar ('body div#app input') mas tudo sempre está dentro de body.
+            //var inputElement = document.querySelector('div#app input');
+            var inputElement = document.querySelector('input[name=nome]');
+            var btnElement = document.querySelector('button.botao');
+
+            btnElement.onclick = function() {
+
+                var text = inputElement.value;
+                alert(text);
+            }
+
+            console.log(inputElement);
+
+            //Traz um único elemento pelo id único.
+            //document.getElementById('nome');
+
+            //Traz sempre um vetor pois varre as tags.
+            //getElementsByTagName('input')[0];
+            //getElementsByClassName('nome')[0];
+
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Desafios</title>
+</head>
+
+<body>
+    <script>
+        function temHabilidade(skills) {
+
+            //Minha solução que funcionou.
+            /*var jSHabilidade = skills.indexOf('Javascript'); 
+            var resultado = jSHabilidade !== -1;
+            console.log(resultado);*/
+
+            //Solução do GitHUB
+            //Não encontrando no vetor o retorno é '-1'
+            return skills.indexOf("Javascript") !== -1;
+        }
+
+        var skills = ["Javascript", "ReactJS", "React Native"];
+        console.log(temHabilidade(skills)); //true ou false
+
+    </script>
+</body>
+
+</html>

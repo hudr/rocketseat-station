@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Desafios</title>
+</head>
+
+<body>
+    <script>
+        var usuarios = [
+            {
+                nome: "Diego",
+                habilidades: ["Javascript", "ReactJS", "Redux"]
+            },
+            {
+                nome: "Gabriel",
+                habilidades: ["VueJS", "Ruby on Rails", "Elixir"]
+            }
+        ];
+
+        //Percorrendo e trazendo o que importa.
+        //Sem mapeamento com índice pois ele já retorna várias vezes o que tem
+        //dentro do array.
+        for (const usuario of usuarios) {
+            console.log(
+                "O " + usuario.nome + " possui as habilidades: " +
+                usuario.habilidades.join(", ") + "."
+            );
+        }
+    </script>
+</body>
+
+</html>
